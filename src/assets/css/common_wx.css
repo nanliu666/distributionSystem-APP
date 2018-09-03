@@ -1,0 +1,277 @@
+/*
+    vue微信端 样式 common.css
+    create by linzy In 2018.2.25
+*/
+/*
+    布局相关
+*/
+* { touch-action: none; }
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+html {
+  font-size: 13.333333vw;
+}
+
+body {
+  font-size: 0.26rem;
+  line-height: 1;
+  font-family: "PingFang SC", "Helvetica Neue", Helvetica, "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
+  font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+  /*background-color: #eef2f3;*/
+  color: #3d3d3d;
+}
+
+/*
+    css 方法库
+ */
+/* 图片父框box */
+.imgBox {
+  display: inline-block;
+  font-size: 0;
+}
+
+.imgBox img {
+  width: 100%;
+  height: 100%;
+}
+
+/* item 底部1px */
+.bor-1px-b {
+  position: relative;
+}
+
+.bor-1px-b:after {
+  content: '';
+  position: absolute;
+  box-sizing: border-box;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 1px;
+  background: #d5d5d5;
+  transform: scaleY(.5);
+  -webkit-transform: scaleY(.5);
+  transform-origin: 0 0;
+  -webkit-transform-origin: 0 0;
+}
+
+/* item 顶部1px */
+.bor-1px-t {
+  position: relative;
+}
+
+.bor-1px-t:after {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 1px;
+  background: #d5d5d5;
+  transform: scaleY(.5);
+  -webkit-transform: scaleY(.5);
+  transform-origin: 0 0;
+  -webkit-transform-origin: 0 0;
+}
+
+/* cell 的底部border */
+.bor-cell {
+  position: relative;
+}
+
+.bor-cell:after {
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  box-sizing: border-box;
+  width: calc(100% - 0.24rem);
+  height: 1px;
+  background: #d5d5d5;
+  transform: scaleY(.5);
+  -webkit-transform: scaleY(.5);
+  transform-origin: 0 0;
+  -webkit-transform-origin: 0 0;
+}
+
+.bor-cell:last-child:after {
+  display: none;
+}
+
+/* 文字超出省略号 */
+.ellipsis {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* 文字溢出换行 */
+.wrap {
+  overflow-y: hidden;
+  word-wrap: break-word;
+  word-break: break-all;
+}
+
+/* 两行文本溢出省略符 */
+.ellipsisTwoRows {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+/* 三行文本溢出省略符 */
+.ellipsisThreeRows {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+.ellipsis-two {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
+}
+
+/* 万能清除浮动 */
+.clearfix::after {
+  content: ".";
+  clear: both;
+  display: block;
+  overflow: hidden;
+  font-size: 0;
+  height: 0;
+}
+
+.clearfix {
+  zoom: 1;
+}
+
+/* 垂直居中 父框 子框 */
+.vertparent:after {
+  content: '.';
+  height: 100%;
+  width: 0;
+  display: inline-block;
+  vertical-align: middle;
+  overflow: hidden;
+}
+
+.vertchild {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* flex 布局简写 */
+.flex-center {
+  display: flex;
+  display: -webkit-flex;
+  align-items: center;
+  -webkit-align-items: center;
+}
+
+.flex-between {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+}
+
+.flex-column {
+  display: flex;
+  display: -webkit-flex;
+  flex-flow: column;
+  -webkit-flex-flow: column;
+}
+
+.flex-baseline {
+  display: flex;
+  display: -webkit-flex;
+  align-items: baseline;
+  -webkit-align-items: baseline;
+}
+
+.flex-center-center {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: center;
+  -webkit-justify-content: center;
+  align-items: center;
+  -webkit-align-items: center;
+}
+
+.flex-between-center {
+  display: flex;
+  display: -webkit-flex;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+  align-items: center;
+  -webkit-align-items: center;
+}
+
+.flex-column-center {
+  display: flex;
+  display: -webkit-flex;
+  flex-flow: column;
+  -webkit-flex-flow: column;
+  align-items: center;
+  -webkit-align-items: center;
+}
+
+.flex-column-between {
+  display: flex;
+  display: -webkit-flex;
+  flex-flow: column;
+  -webkit-flex-flow: column;
+  justify-content: space-between;
+  -webkit-justify-content: space-between;
+}
+
+/* 必填项 添加红色的星号 */
+.required:after {
+  content: '*';
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.03rem;
+  color: #f96e6e;
+}
+
+/* 父框的flex */
+.flex {
+  display: flex;
+  display: -webkit-flex;
+}
+
+/* flex布局 */
+.flex-1 {
+  flex: 1;
+  -webkit-flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.flex-2 {
+  flex: 2;
+  -webkit-flex: 2;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.flex-3 {
+  flex: 3;
+  -webkit-flex: 3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+
+
