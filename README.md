@@ -1,6 +1,4 @@
-# fenxiao
-
-> this is projects
+# 分销系统APP
 
 ## Build Setup
 
