@@ -100,9 +100,9 @@
   @import '../../assets/scss/main.scss';
 
   .remarkCom {
-    .recent {
-      /*color: rgb(4, 190, 2)*/
-    }
+    // .recent {
+    //   /*color: rgb(4, 190, 2)*/
+    // }
     .itemTop {
       margin-bottom: 0.1rem;
       color: #a5a5a5;

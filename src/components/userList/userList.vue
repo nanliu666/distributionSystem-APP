@@ -10,8 +10,7 @@
           <x-input v-model='inputVal' placeholder="请输入"></x-input>
           <x-button mini type="primary" action-type="button" @click.native='sendSearch' >查询</x-button>
         </div>
-
-         <!--表头 -->
+        <!--表头 -->        
         <div class="title">
           <x-table :cell-bordered="true" :content-bordered="true" style="background-color:#fff;">
             <thead>
@@ -23,7 +22,7 @@
               </th>
               <th  @click='sortUD(1)' :style="{color:sortUDindex==1?'#1296db':'#000'}">
                 <span>微信名
-                     <!--<icon  :name="sortUDindex==1?imgSrc:'ud'" class="svg-ud"></icon>-->
+                     <!-- <icon  :name="sortUDindex==1?imgSrc:'ud'" class="svg-ud"></icon> -->
                 </span>
               </th>
               <th @click='sortUD(2)' :style="{color:sortUDindex==2?'#1296db':'#000'}">
@@ -39,7 +38,7 @@
             </tr>
             </thead>
             <tbody>
-                <tr v-for="(item,index) in listData" @click="openDetail(item.id)" :key='item.id'>
+                <tr v-for="(item) in listData" @click="openDetail(item.id)" :key='item.id'>
                   <td>{{item.id?item.id:'暂无'}}</td>
                   <td>{{item.wechat_name?item.wechat_name:'暂无'}}</td>
                   <td>{{item.level?item.level:'暂无'}}</td>

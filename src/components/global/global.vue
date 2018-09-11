@@ -42,7 +42,7 @@
       <grid-item link="">
         <span class="enterBtn" slot="label">
           <img src="./images/tongji.svg"/><br>
-          <span>用户统计</span>
+          <span @click='goUserStatistics'>用户统计</span>
         </span>
       </grid-item>
     </grid>
@@ -101,7 +101,10 @@ export default {
           Number(res.data.data.yesterday_rebate);
         _this.exchange_sum = res.data.data.exchange_sum;
       });
-    }
+    },
+    goUserStatistics() {
+      this.$router.push({ name: "userStatistics", query: { name: "用户统计" } });
+    },
   }
 };
 </script>

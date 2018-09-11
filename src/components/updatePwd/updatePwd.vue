@@ -17,7 +17,7 @@
         </g-input>
         <g-input v-model.trim="pwdAgain" class="gInputClass"
                  :type.sync="inputType"
-                 clearable placeholder="请输入再次输入">
+                 clearable placeholder="请再次输入">
           <i class="yiyifont yiyi-password" slot="prefix"></i>
         </g-input>
         <x-button type="primary" :show-loading="btnLoding"

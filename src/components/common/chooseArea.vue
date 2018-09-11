@@ -323,7 +323,7 @@
       height: 100%;
       background: rgba(0, 0, 0, 0.5);
       opacity: 1;
-      tap-highlight-color: rgba(0, 0, 0, 0);
+      -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
       z-index: 500;
       -webkit-transition: opacity 400ms;
       transition: opacity 400ms;
