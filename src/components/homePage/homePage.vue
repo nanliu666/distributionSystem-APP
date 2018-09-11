@@ -1,6 +1,6 @@
 <template>
     <div id="homePage">
-      <x-header style="background-color:#3B7755;position: fixed;width: 100%;">
+      <x-header style="background-color:#04BE02;position: fixed;width: 100%;">
         <span>{{this.$route.query.name}}</span>
         <x-icon slot="overwrite-left" type="navicon" size="35" style="fill:#fff;position:relative;top:-8px;left:-3px;" @click.native="showMaskClick"></x-icon>
       </x-header>
