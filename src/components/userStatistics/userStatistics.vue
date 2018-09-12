@@ -109,13 +109,14 @@ export default {
             this.ajax(params)
         },
         ajax(params) {
+            //TODO： axios对接后端，401未授权
             let userData = JSON.parse(localStorage.getItem('userData'))
             let ajaxConfig = {
                 methods: 'POST',
                 url: `relation/subdetail`,
                 // headers: {'Authorization': 'Bearer ' + userData.bearer},
                 data:{
-                    start_time: params.startValue,
+                    start_time: params.startValue, 
                     end_time: params.endValue,
                     id: userData.relation_id
                 }

@@ -22,7 +22,7 @@
               </th>
               <th  @click='sortUD(1)' :style="{color:sortUDindex==1?'#1296db':'#000'}">
                 <span>微信名
-                     <!-- <icon  :name="sortUDindex==1?imgSrc:'ud'" class="svg-ud"></icon> -->
+                    <!-- <icon  :name="sortUDindex==1?imgSrc:'ud'" class="svg-ud"></icon> -->
                 </span>
               </th>
               <th @click='sortUD(2)' :style="{color:sortUDindex==2?'#1296db':'#000'}">
