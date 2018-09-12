@@ -104,15 +104,29 @@ export default {
     },
     methods: {
         btnSearch() {
-            let searchUnix = moment(this.dayValue).unix()
-            this.ajax(searchUnix)
+            let [startValue, endValue] = [moment(this.startValue).unix(),  moment(this.endValue).unix()]
+            let params = {startValue, endValue}
+            this.ajax(params)
         },
         ajax(params) {
             let userData = JSON.parse(localStorage.getItem('userData'))
-            console.log(userData)
-            this.axios({
-
-            })
+            let ajaxConfig = {
+                methods: 'POST',
+                url: `relation/subdetail`,
+                // headers: {'Authorization': 'Bearer ' + userData.bearer},
+                data:{
+                    start_time: params.startValue,
+                    end_time: params.endValue,
+                    id: userData.relation_id
+                }
+            }
+            console.log(ajaxConfig.data)
+            this.axios(ajaxConfig)
+                .then((result) => {
+                    console.log(result)
+                }).catch((err) => {
+                    console.log(err)
+                });
         }
     },
 };
