@@ -3,7 +3,7 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-
+import _ from "loadsh"
 /*
  *   添加Fastclick移除移动端点击延迟
  * */
@@ -25,6 +25,7 @@ import '@/assets/vue/prototype.js'
 
 Vue.config.productionTip = false;
 Vue.prototype.HOST = '/api';
+// Vue.prototype._ = _
 /*
  *   引入微信
  * */

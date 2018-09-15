@@ -19,24 +19,26 @@
                             <th v-else class="width50">新增用户数（个）</th>
                         </tr>
                         </thead>
-                        <tbody>
-                        <tr>
-                            <td>Apple</td>
-                            <td>$1.25</td>
-                        </tr>
-                        <tr>
-                            <td>Banana</td>
-                            <td>$1.20</td>
-                        </tr>
+                        <tbody v-if="index === 0">
+                            <tr v-for="(item, index) in hotActive">
+                                <td>{{item.date}}</td>
+                                <td>{{item.numberActive}}</td>
+                            </tr>
+                        </tbody>                        
+                        <tbody v-else>
+                            <tr v-for="(item, index) in newAdd">
+                                <td>{{item.date}}</td>
+                                <td>{{item.numberActive}}</td>
+                            </tr>
                         </tbody>
                     </x-table>  
                 </div> 
                 <div v-else>
                     <button-tab class="XBTab">
-                        <button-tab-item selected>
+                        <button-tab-item selected @on-item-click="Toggle">
                             一局以上
                         </button-tab-item>                        
-                        <button-tab-item>
+                        <button-tab-item @on-item-click="Toggle">
                             30分钟以上
                         </button-tab-item>
                     </button-tab>
@@ -48,24 +50,23 @@
                     <x-table full-bordered style="background-color:#fff;">   
                         <thead>
                             <tr>
-                                <th style="width: 25%">日期</th>
-                                <th style="width: 25%">每天玩1局以上用户数（个）</th>
-                                <th style="width: 25%">总用户数</th>
-                                <th style="width: 25%">占总用户数比例</th>
+                                <th v-for="(item, index) in gameHead" :key="index" style="width: 25%">{{item}}</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>Apple</td>
-                                <td>Apple</td>
-                                <td>Apple</td>
-                                <td>Apple</td>
+                        <tbody v-show="oneGame">
+                            <tr v-for="(item, index) in gameAddOne" :key="index">
+                                <td>{{item.date}}</td>
+                                <td>{{item.numberActive}}</td>
+                                <td>{{item.all}}</td>
+                                <td>{{item.ratio}}%</td>
                             </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
-                                <td>1</td>
+                        </tbody>                        
+                        <tbody v-show="ThreeMin">
+                            <tr v-for="(item, index) in gameAddThree" :key="index">
+                                <td>{{item.date}}</td>
+                                <td>{{item.numberActive}}</td>
+                                <td>{{item.all}}</td>
+                                <td>{{item.ratio}}%</td>
                             </tr>
                         </tbody>
                     </x-table>
@@ -77,8 +78,12 @@
 </template>
 <script>
 import moment from "moment"
+const Mock = require('mockjs')
 import { Tab, TabItem, Swiper, SwiperItem, XTable,  ButtonTab, ButtonTabItem, DatetimeRange, Group } from "vux";
 const swiperList = () => ["活跃用户", "新增用户", "游戏数据"];
+const gameHeadList = () => ["日期", "每天玩1局以上用户数（个）","总用户数", "占总用户数比例"]
+const Random = Mock.Random;
+
 
 export default {
     components: {
@@ -92,6 +97,10 @@ export default {
         DatetimeRange ,
         Group
     },
+    created() {
+        this.produceNewsData()
+        this.produceGameData()
+    },
     data() {
         return {
             index: 0,
@@ -100,6 +109,13 @@ export default {
             startValue: "2015-11-12",
             endValue: "2015-11-13",
             swiperList: swiperList(),
+            gameHead: gameHeadList(),
+            hotActive: [],
+            newAdd: [],
+            gameAddOne:[],
+            gameAddThree:[],
+            oneGame: false,
+            ThreeMin: true
         }
     },
     methods: {
@@ -108,6 +124,53 @@ export default {
             let params = {startValue, endValue}
             this.ajax(params)
         },
+        Toggle() {
+            this.oneGame = !this.oneGame
+            this.ThreeMin = !this.ThreeMin
+        },
+        //mock 新增 活跃数据
+        produceNewsData() {
+            for (let i = 0; i < 5; i++) {
+                let newArticleObject = {
+                numberActive: parseInt(Math.random()*5), //  Random.csentence( min, max )
+                date: Random.date()  // Random.date()指示生成的日期字符串的格式,默认为yyyy-MM-dd；
+                }
+            this.hotActive.push(newArticleObject)
+            this.newAdd.push(newArticleObject)
+            }
+            this.hotActive  = this._.sortBy(this.hotActive, function(item) {
+                return item.date;
+            });                
+            this.newAdd  = this._.sortBy(this.newAdd, function(item) {
+                return item.date;
+            });    
+        },
+        // mock游戏数据
+        produceGameData() {
+            for(let i = 0; i < 10; i++) {
+                let newObj = {
+                    date: Random.date(),
+                    numberActive: parseInt(Math.random()*10),
+                    all: parseInt(Math.random()*10),
+                    ratio: parseInt(Math.random()*(10+1),10)
+                }                
+                let newObjThree = {
+                    date: Random.date(),
+                    numberActive: parseInt(Math.random()*10),
+                    all: parseInt(Math.random()*10),
+                    ratio: parseInt(Math.random()*(10+1),10)
+                }
+                this.gameAddOne.push(newObj)
+                this.gameAddThree.push(newObjThree)
+            }
+            this.gameAddOne  = this._.sortBy(this.gameAddOne, function(item) {
+                return item.date;
+            });                
+            this.gameAddThree  = this._.sortBy(this.gameAddThree, function(item) {
+                return item.date;
+            });  
+        },
+
         ajax(params) {
             //TODO： axios对接后端，401未授权
             let userData = JSON.parse(localStorage.getItem('userData'))
