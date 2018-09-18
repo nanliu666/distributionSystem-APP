@@ -107,6 +107,7 @@
               </div>
             </div>
             <x-button class="up" type="primary" v-if="detailedData.agency_id == null ">升级为代理商</x-button>
+            <!-- <x-button class="up" type="primary" v-if="detailedData.agency_id == null ">升级为代理商</x-button> -->
             <x-icon type="ios-close-outline" style="fill:#999;"  @click="closeDialog()"></x-icon>
           </div>
         </x-dialog>

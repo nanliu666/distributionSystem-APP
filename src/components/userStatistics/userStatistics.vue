@@ -1,4 +1,5 @@
 <template>
+
     <div id='userStatistics'>
         <tab :line-width=2 v-model="index">
             <tab-item class="vux-center" v-for="(item, index) in swiperList" :key="index">{{item}}</tab-item>
@@ -115,7 +116,9 @@ export default {
             gameAddOne: [],
             gameAddThree: [],
             oneGame: false,
-            ThreeMin: true
+            ThreeMin: true,
+
+        
         }
     },
     methods: {
@@ -131,12 +134,16 @@ export default {
         //mock 新增 活跃数据
         produceNewsData() {
             for (let i = 0; i < 5; i++) {
-                let newArticleObject = {
+                let hotActiveObject = {
                     numberActive: parseInt(Math.random() * 5), //  Random.csentence( min, max )
                     date: Random.date()  // Random.date()指示生成的日期字符串的格式,默认为yyyy-MM-dd；
                 }
-                this.hotActive.push(newArticleObject)
-                this.newAdd.push(newArticleObject)
+                let newAddObject = {
+                    numberActive: parseInt(Math.random() * 5), //  Random.csentence( min, max )
+                    date: Random.date()  // Random.date()指示生成的日期字符串的格式,默认为yyyy-MM-dd；
+                }
+                this.hotActive.push(hotActiveObject)
+                this.newAdd.push(newAddObject)
             }
             this.hotActive = this._.sortBy(this.hotActive, function (item) {
                 return item.date;
@@ -170,14 +177,13 @@ export default {
                 return item.date;
             });
         },
-
         ajax(params) {
             //TODO： axios对接后端，401未授权
             let userData = JSON.parse(localStorage.getItem('userData'))
             let ajaxConfig = {
                 methods: 'POST',
                 url: `relation/subdetail`,
-                // headers: {'Authorization': 'Bearer ' + userData.bearer},
+                headers: { 'Authorization': 'Bearer ' + userData.bearer },
                 data: {
                     start_time: params.startValue,
                     end_time: params.endValue,
