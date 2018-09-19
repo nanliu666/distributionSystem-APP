@@ -74,13 +74,13 @@
                 </div>
             </swiper-item>
         </swiper>
-
     </div>
 </template>
 <script>
 import moment from "moment"
-const Mock = require('mockjs')
+import Mock from 'mockjs'
 import { Tab, TabItem, Swiper, SwiperItem, XTable, ButtonTab, ButtonTabItem, DatetimeRange, Group } from "vux";
+
 const swiperList = () => ["活跃用户", "新增用户", "游戏数据"];
 const gameHeadList = () => ["日期", "每天玩1局以上用户数（个）", "总用户数", "占总用户数比例"]
 const Random = Mock.Random;
@@ -96,7 +96,8 @@ export default {
         ButtonTab,
         ButtonTabItem,
         DatetimeRange,
-        Group
+        Group,
+
     },
     created() {
         this.produceNewsData()
@@ -117,8 +118,7 @@ export default {
             gameAddThree: [],
             oneGame: false,
             ThreeMin: true,
-
-        
+ 
         }
     },
     methods: {
@@ -170,10 +170,10 @@ export default {
                 this.gameAddOne.push(newObj)
                 this.gameAddThree.push(newObjThree)
             }
-            this.gameAddOne = this._.sortBy(this.gameAddOne, function (item) {
+            this.gameAddOne = this._.sortBy(this.gameAddOne, (item) => {
                 return item.date;
             });
-            this.gameAddThree = this._.sortBy(this.gameAddThree, function (item) {
+            this.gameAddThree = this._.sortBy(this.gameAddThree, (item) => {
                 return item.date;
             });
         },
