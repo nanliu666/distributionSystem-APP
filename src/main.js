@@ -4,11 +4,9 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import _ from "loadsh"
-/*
- *   添加Fastclick移除移动端点击延迟
- * */
-const FastClick = require('fastclick');
-FastClick.attach(document.body);
+import {
+    WechatPlugin
+} from 'vux'
 
 /*
 引入css reset.css 重置原始样式 ic
@@ -23,15 +21,21 @@ import '@/assets/vue/filters.js'
 import '@/assets/vue/globalComonents.js'
 import '@/assets/vue/prototype.js'
 
+/*
+ *   添加Fastclick移除移动端点击延迟
+ * */
+const FastClick = require('fastclick');
+FastClick.attach(document.body);
+
+
+
 Vue.config.productionTip = false;
 Vue.prototype.HOST = '/api';
 // Vue.prototype._ = _
 /*
  *   引入微信
  * */
-import {
-    WechatPlugin
-} from 'vux'
+
 Vue.use(WechatPlugin);
 // console.log(Vue.wechat)
 
