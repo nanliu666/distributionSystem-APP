@@ -77,128 +77,144 @@
     </div>
 </template>
 <script>
-import moment from "moment"
-import Mock from 'mockjs'
-import { Tab, TabItem, Swiper, SwiperItem, XTable, ButtonTab, ButtonTabItem, DatetimeRange, Group } from "vux";
+import moment from "moment";
+import Mock from "mockjs";
+import {
+  Tab,
+  TabItem,
+  Swiper,
+  SwiperItem,
+  XTable,
+  ButtonTab,
+  ButtonTabItem,
+  DatetimeRange,
+  Group
+} from "vux";
 
 const swiperList = () => ["活跃用户", "新增用户", "游戏数据"];
-const gameHeadList = () => ["日期", "每天玩1局以上用户数（个）", "总用户数", "占总用户数比例"]
+const gameHeadList = () => [
+  "日期",
+  "每天玩1局以上用户数（个）",
+  "总用户数",
+  "占总用户数比例"
+];
 const Random = Mock.Random;
 
-
 export default {
-    components: {
-        Tab,
-        TabItem,
-        Swiper,
-        SwiperItem,
-        XTable,
-        ButtonTab,
-        ButtonTabItem,
-        DatetimeRange,
-        Group,
-
+  components: {
+    Tab,
+    TabItem,
+    Swiper,
+    SwiperItem,
+    XTable,
+    ButtonTab,
+    ButtonTabItem,
+    DatetimeRange,
+    Group
+  },
+  created() {
+    this.produceNewsData();
+    this.produceGameData();
+  },
+  data() {
+    return {
+      index: 0,
+      startTitle: "选择开始日期",
+      endTitle: "选择结束日期",
+      startValue: "2015-11-12",
+      endValue: "2015-11-13",
+      swiperList: swiperList(),
+      gameHead: gameHeadList(),
+      hotActive: [],
+      newAdd: [],
+      gameAddOne: [],
+      gameAddThree: [],
+      oneGame: false,
+      ThreeMin: true
+    };
+  },
+  methods: {
+    btnSearch() {
+      let [startValue, endValue] = [
+        moment(this.startValue).unix(),
+        moment(this.endValue).unix()
+      ];
+      let params = { startValue, endValue };
+      this.ajax(params);
     },
-    created() {
-        this.produceNewsData()
-        this.produceGameData()
+    Toggle() {
+      this.oneGame = !this.oneGame;
+      this.ThreeMin = !this.ThreeMin;
     },
-    data() {
-        return {
-            index: 0,
-            startTitle: "选择开始日期",
-            endTitle: "选择结束日期",
-            startValue: "2015-11-12",
-            endValue: "2015-11-13",
-            swiperList: swiperList(),
-            gameHead: gameHeadList(),
-            hotActive: [],
-            newAdd: [],
-            gameAddOne: [],
-            gameAddThree: [],
-            oneGame: false,
-            ThreeMin: true,
- 
+    //mock 新增 活跃数据
+    produceNewsData() {
+      for (let i = 0; i < 5; i++) {
+        let hotActiveObject = {
+          numberActive: parseInt(Math.random() * 5), //  Random.csentence( min, max )
+          date: Random.date() // Random.date()指示生成的日期字符串的格式,默认为yyyy-MM-dd；
+        };
+        let newAddObject = {
+          numberActive: parseInt(Math.random() * 5), //  Random.csentence( min, max )
+          date: Random.date() // Random.date()指示生成的日期字符串的格式,默认为yyyy-MM-dd；
+        };
+        this.hotActive.push(hotActiveObject);
+        this.newAdd.push(newAddObject);
+      }
+      this.hotActive = this._.sortBy(this.hotActive, function(item) {
+        return item.date;
+      });
+      this.newAdd = this._.sortBy(this.newAdd, function(item) {
+        return item.date;
+      });
+    },
+    // mock游戏数据
+    produceGameData() {
+      for (let i = 0; i < 10; i++) {
+        let newObj = {
+          date: Random.date(),
+          numberActive: parseInt(Math.random() * 10),
+          all: parseInt(Math.random() * 10),
+          ratio: parseInt(Math.random() * (10 + 1), 10)
+        };
+        let newObjThree = {
+          date: Random.date(),
+          numberActive: parseInt(Math.random() * 10),
+          all: parseInt(Math.random() * 10),
+          ratio: parseInt(Math.random() * (10 + 1), 10)
+        };
+        this.gameAddOne.push(newObj);
+        this.gameAddThree.push(newObjThree);
+      }
+      this.gameAddOne = this._.sortBy(this.gameAddOne, item => {
+        return item.date;
+      });
+      this.gameAddThree = this._.sortBy(this.gameAddThree, item => {
+        return item.date;
+      });
+    },
+    ajax(params) {
+      //TODO： axios对接后端，401未授权
+      let userData = JSON.parse(localStorage.getItem("userData"));
+      let ajaxConfig = {
+        methods: "POST",
+        url: `relation/subdetail`,
+        headers: { Authorization: "Bearer " + userData.bearer },
+        data: {
+          start_time: params.startValue,
+          end_time: params.endValue,
+          id: userData.relation_id
         }
-    },
-    methods: {
-        btnSearch() {
-            let [startValue, endValue] = [moment(this.startValue).unix(), moment(this.endValue).unix()]
-            let params = { startValue, endValue }
-            this.ajax(params)
-        },
-        Toggle() {
-            this.oneGame = !this.oneGame
-            this.ThreeMin = !this.ThreeMin
-        },
-        //mock 新增 活跃数据
-        produceNewsData() {
-            for (let i = 0; i < 5; i++) {
-                let hotActiveObject = {
-                    numberActive: parseInt(Math.random() * 5), //  Random.csentence( min, max )
-                    date: Random.date()  // Random.date()指示生成的日期字符串的格式,默认为yyyy-MM-dd；
-                }
-                let newAddObject = {
-                    numberActive: parseInt(Math.random() * 5), //  Random.csentence( min, max )
-                    date: Random.date()  // Random.date()指示生成的日期字符串的格式,默认为yyyy-MM-dd；
-                }
-                this.hotActive.push(hotActiveObject)
-                this.newAdd.push(newAddObject)
-            }
-            this.hotActive = this._.sortBy(this.hotActive, function (item) {
-                return item.date;
-            });
-            this.newAdd = this._.sortBy(this.newAdd, function (item) {
-                return item.date;
-            });
-        },
-        // mock游戏数据
-        produceGameData() {
-            for (let i = 0; i < 10; i++) {
-                let newObj = {
-                    date: Random.date(),
-                    numberActive: parseInt(Math.random() * 10),
-                    all: parseInt(Math.random() * 10),
-                    ratio: parseInt(Math.random() * (10 + 1), 10)
-                }
-                let newObjThree = {
-                    date: Random.date(),
-                    numberActive: parseInt(Math.random() * 10),
-                    all: parseInt(Math.random() * 10),
-                    ratio: parseInt(Math.random() * (10 + 1), 10)
-                }
-                this.gameAddOne.push(newObj)
-                this.gameAddThree.push(newObjThree)
-            }
-            this.gameAddOne = this._.sortBy(this.gameAddOne, (item) => {
-                return item.date;
-            });
-            this.gameAddThree = this._.sortBy(this.gameAddThree, (item) => {
-                return item.date;
-            });
-        },
-        ajax(params) {
-            //TODO： axios对接后端，401未授权
-            let userData = JSON.parse(localStorage.getItem('userData'))
-            let ajaxConfig = {
-                methods: 'POST',
-                url: `relation/subdetail`,
-                headers: { 'Authorization': 'Bearer ' + userData.bearer },
-                data: {
-                    start_time: params.startValue,
-                    end_time: params.endValue,
-                    id: userData.relation_id
-                }
-            }
-            console.log(ajaxConfig.data)
-            this.axios(ajaxConfig)
-                .then((result) => {
-                    console.log(result)
-                }).catch((err) => {
-                    console.log(err)
-                });
-        }
-    },
+      };
+      console.log(ajaxConfig.data);
+      this.axios(ajaxConfig)
+        .then(result => {
+          console.log(result);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+  }
 };
 </script>
 
