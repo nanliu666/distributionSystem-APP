@@ -91,13 +91,6 @@ import {
   Group
 } from 'vux'
 
-const swiperList = () => ['活跃用户', '新增用户', '游戏数据']
-const gameHeadList = () => [
-  '日期',
-  '每天玩1局以上用户数（个）',
-  '总用户数',
-  '占总用户数比例'
-]
 const Random = Mock.Random
 
 export default {
@@ -123,8 +116,13 @@ export default {
       endTitle: '选择结束日期',
       startValue: '2015-11-12',
       endValue: '2015-11-13',
-      swiperList: swiperList(),
-      gameHead: gameHeadList(),
+      swiperList: ['活跃用户', '新增用户', '游戏数据'],
+      gameHead: [
+        '日期',
+        '每天玩1局以上用户数（个）',
+        '总用户数',
+        '占总用户数比例'
+      ],
       hotActive: [],
       newAdd: [],
       gameAddOne: [],
@@ -133,6 +131,7 @@ export default {
       ThreeMin: true
     }
   },
+
   methods: {
     btnSearch() {
       let [startValue, endValue] = [
