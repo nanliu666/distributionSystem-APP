@@ -1,6 +1,6 @@
 <template>
 
-  <div id='userStatistics'>
+  <div id="userStatistics">
     <tab :line-width=2 v-model="index">
       <tab-item class="vux-center" v-for="(item, index) in swiperList" :key="index">{{item}}</tab-item>
     </tab>
@@ -138,7 +138,10 @@ export default {
         moment(this.startValue).unix(),
         moment(this.endValue).unix()
       ]
-      let params = { startValue, endValue }
+      let params = {
+        startValue,
+        endValue
+      }
       this.ajax(params)
     },
     Toggle() {
@@ -197,7 +200,9 @@ export default {
       let ajaxConfig = {
         methods: 'POST',
         url: `relation/subdetail`,
-        headers: { Authorization: 'Bearer ' + userData.bearer },
+        headers: {
+          Authorization: 'Bearer ' + userData.bearer
+        },
         data: {
           start_time: params.startValue,
           end_time: params.endValue,
@@ -222,20 +227,23 @@ export default {
   a {
     text-decoration: none;
   }
+
   padding-top: 46px;
+
   .width50 {
     width: 50%;
   }
+
   .XSwiper {
     margin: -13px 10px 10px;
   }
+
   .XButton {
     margin-bottom: 10px;
   }
+
   .XBTab {
     margin: 20px 0 -13px;
   }
 }
 </style>
-
-
