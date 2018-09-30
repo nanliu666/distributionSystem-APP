@@ -2,7 +2,7 @@
  * @Author: NaNSix 
  * @Date: 2018-09-30 16:54:23 
  * @Last Modified by: NaNSix
- * @Last Modified time: 2018-09-30 17:43:03
+ * @Last Modified time: 2018-09-30 17:56:52
  */
 
 import Vue from 'vue'
@@ -33,7 +33,6 @@ FastClick.attach(document.body);
 
 Vue.config.productionTip = false;
 Vue.prototype.HOST = '/api';
-// Vue.prototype._ = _
 /*
  *   引入微信
  * */
