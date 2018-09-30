@@ -1,11 +1,16 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+/*
+ * @Author: NaNSix 
+ * @Date: 2018-09-30 16:54:23 
+ * @Last Modified by: NaNSix
+ * @Last Modified time: 2018-09-30 17:43:03
+ */
+
 import Vue from 'vue'
 import App from './App'
 import router from './router'
 import _ from "loadsh"
 import {
-    WechatPlugin
+  WechatPlugin
 } from 'vux'
 
 /*
@@ -13,7 +18,6 @@ import {
 */
 import '@/assets/css/reset.css'
 import '@/assets/css/common_wx.css'
-import '@/assets/yiyifont/iconfont.css'
 
 
 import '@/assets/vue/axios.js'
@@ -27,8 +31,6 @@ import '@/assets/vue/prototype.js'
 const FastClick = require('fastclick');
 FastClick.attach(document.body);
 
-
-
 Vue.config.productionTip = false;
 Vue.prototype.HOST = '/api';
 // Vue.prototype._ = _
@@ -37,14 +39,13 @@ Vue.prototype.HOST = '/api';
  * */
 
 Vue.use(WechatPlugin);
-// console.log(Vue.wechat)
 
 /* eslint-disable no-new */
 new Vue({
-    el: '#app',
-    router,
-    components: {
-        App
-    },
-    template: '<App/>'
+  el: '#app',
+  router,
+  components: {
+    App
+  },
+  template: '<App/>'
 });
