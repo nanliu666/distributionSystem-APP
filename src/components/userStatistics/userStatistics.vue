@@ -22,6 +22,7 @@
             </thead>
             <tbody v-if="index === 0">
               <tr v-for="(item, index) in hotActive" :key=index>
+
                 <td>{{item.date}}</td>
                 <td>{{item.numberActive}}</td>
               </tr>
@@ -75,6 +76,7 @@
       </swiper-item>
     </swiper>
   </div>
+
 </template>
 <script>
 import moment from 'moment'
@@ -227,7 +229,6 @@ export default {
   a {
     text-decoration: none;
   }
-
   padding-top: 46px;
 
   .width50 {
