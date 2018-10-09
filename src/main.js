@@ -2,7 +2,7 @@
  * @Author: NaNSix 
  * @Date: 2018-09-30 16:54:23 
  * @Last Modified by: NaNSix
- * @Last Modified time: 2018-09-30 17:56:52
+ * @Last Modified time: 2018-10-09 10:02:16
  */
 
 import Vue from 'vue'
@@ -36,7 +36,6 @@ Vue.prototype.HOST = '/api';
 /*
  *   引入微信
  * */
-
 Vue.use(WechatPlugin);
 
 /* eslint-disable no-new */
